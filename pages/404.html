@@ -1,36 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>- 404</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <title>- 404</title>
-  <style>
-    * {
-      color: red;
-    }
-    body {
-      background-color: black;
-    }
-
-    .bg-divider {
-      background-color: pink;
-    }
-    .w-divider {
-      width: 1px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alight Motion XML Editor</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e9ecef;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #343a40;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+        input[type="file"] {
+            display: block;
+            margin: 0 auto 10px;
+        }
+        select, button {
+            display: block;
+            width: calc(100% - 22px);
+            margin: 10px auto;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        pre {
+            background-color: #f8f9fa;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            padding: 15px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
 </head>
-<body class="font-sans antialiased">
-  <div class="flex flex-col items-center justify-center h-screen text-white">
-    <div class="flex h-5 items-center space-x-4">
-      <h1 class="text-4xl font-bold" style="color: pink">404</h1>
-      <div class="shrink-0 bg-divider border-none h-full w-divider" role="separator"></div>
-      <h2 style="color: #ffc0cb92">Page not found</h2>
-      <div class="shrink-0 bg-divider border-none h-full w-divider" role="separator"></div>
-      <a href="/login">login?</a>
+<body>
+    <div class="container">
+        <h1>Alight Motion XML Editor</h1>
+        <input type="file" id="fileInput" accept=".xml">
+        <label for="fpsDropdown">Choose FPS:</label>
+        <select id="fpsDropdown">
+            <option value="24">24 FPS</option>
+            <option value="30">30 FPS</option>
+            <option value="60">60 FPS</option>
+            <option value="120">120 FPS</option>
+        </select>
+        <label for="resolutionDropdown">Choose Resolution:</label>
+        <select id="resolutionDropdown">
+            <option value="144p">144p</option>
+            <option value="240p">240p</option>
+            <option value="360p">360p</option>
+            <option value="480p">480p</option>
+            <option value="720p">720p</option>
+            <option value="1080p">1080p</option>
+            <option value="1440p">1440p</option>
+            <option value="2k">2k</option>
+            <option value="4k">4k</option>
+        </select>
+        <button id="updateButton">Update XML</button>
+        <button id="downloadButton" style="display: none;">Download XML</button>
+        <pre id="output"></pre>
     </div>
-  </div>
+
+    <script>
+        let xmlContent = '';
+        let fileName = '';
+
+        const resolutionMap = {
+            '144p': { width: '256', height: '144', exportWidth: '256', exportHeight: '144' },
+            '240p': { width: '426', height: '240', exportWidth: '426', exportHeight: '240' },
+            '360p': { width: '640', height: '360', exportWidth: '640', exportHeight: '360' },
+            '480p': { width: '854', height: '480', exportWidth: '854', exportHeight: '480' },
+            '720p': { width: '1280', height: '720', exportWidth: '1280', exportHeight: '720' },
+            '1080p': { width: '1920', height: '1080', exportWidth: '1920', exportHeight: '1080' },
+            '1440p': { width: '2560', height: '1440', exportWidth: '2560', exportHeight: '1440' },
+            '2k': { width: '2048', height: '1080', exportWidth: '2048', exportHeight: '1080' },
+            '4k': { width: '3840', height: '2160', exportWidth: '3840', exportHeight: '2160' }
+        };
+
+        document.getElementById('fileInput').addEventListener('change', handleFileSelect, false);
+        document.getElementById('updateButton').addEventListener('click', updateXML, false);
+        document.getElementById('downloadButton').addEventListener('click', downloadFile, false);
+
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (file && file.type === 'text/xml') {
+                fileName = file.name; // Save the original file name
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    xmlContent = e.target.result;
+                    document.getElementById('output').textContent = xmlContent;
+                    document.getElementById('downloadButton').style.display = 'none';
+                };
+                reader.readAsText(file);
+            } else {
+                alert('Please upload a valid XML file.');
+            }
+        }
+
+        function updateXML() {
+            if (!xmlContent) {
+                alert('No XML file loaded.');
+                return;
+            }
+
+            const fpsValue = document.getElementById('fpsDropdown').value;
+            const resolutionValue = document.getElementById('resolutionDropdown').value;
+            const resolution = resolutionMap[resolutionValue];
+
+            xmlContent = xmlContent.replace(/fps="\d+"/, `fps="${fpsValue}"`);
+
+            xmlContent = xmlContent.replace(/width="\d+"/, `width="${resolution.width}"`);
+            xmlContent = xmlContent.replace(/height="\d+"/, `height="${resolution.height}"`);
+            xmlContent = xmlContent.replace(/exportWidth="\d+"/, `exportWidth="${resolution.exportWidth}"`);
+            xmlContent = xmlContent.replace(/exportHeight="\d+"/, `exportHeight="${resolution.exportHeight}"`);
+
+            document.getElementById('output').textContent = xmlContent;
+            document.getElementById('downloadButton').style.display = 'block';
+        }
+
+        function downloadFile() {
+            if (!xmlContent) {
+                alert('No XML content available for download.');
+                return;
+            }
+
+            const blob = new Blob([xmlContent], { type: 'text/xml' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = fileName;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+    </script>
 </body>
-</html>
+  </html>
