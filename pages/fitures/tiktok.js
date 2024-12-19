@@ -7,7 +7,6 @@ const axios = require("axios")
 
 module.exports = async (req, res) => {
   const urls = req.query.urls
-  const apiKey = req.query.apiKey
 
   if (!urls) {
     return res.status(400).json({
