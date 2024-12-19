@@ -36,40 +36,25 @@ app.get("/", limit, (req, res) => {
     res.sendFile(path.join(__dirname, "../pages/404.html"))
 })
 
-app.get("/login", limit, (req, res) => {
+app.get("/profile", limit, (req, res) => {
     res.sendFile(path.join(__dirname, "../pages/login.html"))
 })
 
-app.get("/profile", limit, isAuthenticated, (req, res) => {
+app.get("/api", limit, (req, res) => {
     res.sendFile(path.join(__dirname, "../pages/profile.html"))
 })
 
 /* = ENDPOINT FITURE = */
-app.post('/register', (req, res) => {
-    require("../declaration/register.jsx")(req, res)
-})
 
-app.post('/login', (req, res) => {
-    require("../declaration/login.jsx")(req, res)
-})
-
-app.get("/logout", (req, res) => {
-    require("../declaration/logout.jsx")(req, res)
-})
-
-app.get("/prof", isAuthenticated, (req, res) => {
-    require("../declaration/profile.jsx")(req, res)
-})
-
-app.get("/blekbok", limit, async (req, res) => {
+app.get("/api/blekbok", limit, async (req, res) => {
     require("../pages/fitures/blackbox.js")(req, res)
 })
 
-app.get("/tiktokDL", limit, async (req, res) => {
+app.get("/api/tiktokDL", limit, async (req, res) => {
     require("../pages/fitures/tiktok.js")(req, res)
 })
 
-app.get("/instagramDL", limit, async (req, res) => {
+app.get("/api/instagramDL", limit, async (req, res) => {
     require("../pages/fitures/instagram.js")(req, res)
 })
 
