@@ -1,161 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alight Motion XML Editor</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #e9ecef;
-            margin: 0;
-            padding: 20px;
-        }
-        h1 {
-            color: #343a40;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .container {
-            max-width: 800px;
-            margin: auto;
-            background: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            padding: 20px;
-        }
-        input[type="file"] {
-            display: block;
-            margin: 0 auto 10px;
-        }
-        select, button {
-            display: block;
-            width: calc(100% - 22px);
-            margin: 10px auto;
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ced4da;
-            border-radius: 4px;
-        }
-        button {
-            background-color: #007bff;
-            color: #ffffff;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        pre {
-            background-color: #f8f9fa;
-            border: 1px solid #ced4da;
-            border-radius: 4px;
-            padding: 15px;
-            overflow-x: auto;
-            white-space: pre-wrap;
-            font-family: 'Courier New', Courier, monospace;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hann Universe</title>
 </head>
 <body>
-    <div class="container">
-        <h1>Alight Motion XML Editor</h1>
-        <input type="file" id="fileInput" accept=".xml">
-        <label for="fpsDropdown">Choose FPS:</label>
-        <select id="fpsDropdown">
-            <option value="24">24 FPS</option>
-            <option value="30">30 FPS</option>
-            <option value="60">60 FPS</option>
-            <option value="120">120 FPS</option>
-        </select>
-        <label for="resolutionDropdown">Choose Resolution:</label>
-        <select id="resolutionDropdown">
-            <option value="144p">144p</option>
-            <option value="240p">240p</option>
-            <option value="360p">360p</option>
-            <option value="480p">480p</option>
-            <option value="720p">720p</option>
-            <option value="1080p">1080p</option>
-            <option value="1440p">1440p</option>
-            <option value="2k">2k</option>
-            <option value="4k">4k</option>
-        </select>
-        <button id="updateButton">Update XML</button>
-        <button id="downloadButton" style="display: none;">Download XML</button>
-        <pre id="output"></pre>
-    </div>
+   <style>
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    <script>
-        let xmlContent = '';
-        let fileName = '';
+body {
+  font-family: 'Arial', sans-serif;
+  color: #fff;
+  background: linear-gradient(135deg, #0d0d0d, #1a1a2e);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-        const resolutionMap = {
-            '144p': { width: '256', height: '144', exportWidth: '256', exportHeight: '144' },
-            '240p': { width: '426', height: '240', exportWidth: '426', exportHeight: '240' },
-            '360p': { width: '640', height: '360', exportWidth: '640', exportHeight: '360' },
-            '480p': { width: '854', height: '480', exportWidth: '854', exportHeight: '480' },
-            '720p': { width: '1280', height: '720', exportWidth: '1280', exportHeight: '720' },
-            '1080p': { width: '1920', height: '1080', exportWidth: '1920', exportHeight: '1080' },
-            '1440p': { width: '2560', height: '1440', exportWidth: '2560', exportHeight: '1440' },
-            '2k': { width: '2048', height: '1080', exportWidth: '2048', exportHeight: '1080' },
-            '4k': { width: '3840', height: '2160', exportWidth: '3840', exportHeight: '2160' }
-        };
+.container {
+  text-align: center;
+  max-width: 800px;
+  margin: auto;
+}
 
-        document.getElementById('fileInput').addEventListener('change', handleFileSelect, false);
-        document.getElementById('updateButton').addEventListener('click', updateXML, false);
-        document.getElementById('downloadButton').addEventListener('click', downloadFile, false);
+.navbar {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
 
-        function handleFileSelect(event) {
-            const file = event.target.files[0];
-            if (file && file.type === 'text/xml') {
-                fileName = file.name; // Save the original file name
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    xmlContent = e.target.result;
-                    document.getElementById('output').textContent = xmlContent;
-                    document.getElementById('downloadButton').style.display = 'none';
-                };
-                reader.readAsText(file);
-            } else {
-                alert('Please upload a valid XML file.');
-            }
-        }
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+  color: #ffffff;
+}
 
-        function updateXML() {
-            if (!xmlContent) {
-                alert('No XML file loaded.');
-                return;
-            }
+.content h1 {
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+}
 
-            const fpsValue = document.getElementById('fpsDropdown').value;
-            const resolutionValue = document.getElementById('resolutionDropdown').value;
-            const resolution = resolutionMap[resolutionValue];
+.content p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  color: #dcdcdc;
+}
 
-            xmlContent = xmlContent.replace(/fps="\d+"/, `fps="${fpsValue}"`);
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
 
-            xmlContent = xmlContent.replace(/width="\d+"/, `width="${resolution.width}"`);
-            xmlContent = xmlContent.replace(/height="\d+"/, `height="${resolution.height}"`);
-            xmlContent = xmlContent.replace(/exportWidth="\d+"/, `exportWidth="${resolution.exportWidth}"`);
-            xmlContent = xmlContent.replace(/exportHeight="\d+"/, `exportHeight="${resolution.exportHeight}"`);
+.btn {
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background 0.3s ease;
+}
 
-            document.getElementById('output').textContent = xmlContent;
-            document.getElementById('downloadButton').style.display = 'block';
-        }
+.btn.primary {
+  background: #3b82f6;
+  color: #fff;
+}
 
-        function downloadFile() {
-            if (!xmlContent) {
-                alert('No XML content available for download.');
-                return;
-            }
+.btn.primary:hover {
+  background: #2563eb;
+}
 
-            const blob = new Blob([xmlContent], { type: 'text/xml' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = fileName;
-            a.click();
-            URL.revokeObjectURL(url);
-        }
-    </script>
+.btn.secondary {
+  background: #374151;
+  color: #fff;
+}
+
+.btn.secondary:hover {
+  background: #1f2937;
+}
+   </style>
+  <div class="container">
+    <header class="navbar">
+      <div class="logo">Hann Universe</div>
+    </header>
+    <main class="content">
+      <h1>Hann Universe</h1>
+      <p>Hann Universe provides endpoints for accessing anime-related data and other</p>
+      <div class="buttons">
+        <a href="/api" class="btn primary">Get Started</a>
+        <a href="/profile" class="btn secondary">My Profile</a>
+      </div>
+    </main>
+  </div>
 </body>
-  </html>
+</html>
