@@ -1,184 +1,183 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Register & Login</title>
-  <style>
-    * {
-      -webkit-tap-highlight-color: transparent;
-    }
-    body, html {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: Arial, sans-serif;
-      background-color: #0d0d1a;
-      color: #fff;
-      overflow: hidden;
-    }
-    .container {
-      width: 320px;
-      padding: 20px;
-      background-color: transparent;
-      border-radius: 8px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-      text-align: center;
-    }
-    input[type="text"], input[type="password"] {
-      width: calc(100% - 15px);
-      padding: 12px;
-      margin: 12px 0;
-      background: #1e1e38;
-      border: none;
-      color: #ffffff;
-      border-radius: 5px;
-      font-size: 16px;
-    }
-    input[type="submit"] {
-      width: calc(100% - 15px);
-      padding: 12px;
-      background-color: #3d3d73;
-      border: none;
-      color: #ffffff;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-      transition: background 0.3s;
-    }
-    input[type="submit"]:hover {
-      background-color: #5c5c9a;
-    }
-    p {
-      font-size: 14px;
-      margin-top: 10px;
-    }
-    .anu {
-      color: white;
-      background: linear-gradient(45deg, #3b3b53, #5c5c9a);
-      transition: transform 0.4s, box-shadow 0.4s;
-      cursor: pointer;
-    }
-    .anu:hover {
-      box-shadow: 0 4px 15px rgba(0,0,0,0.6);
-    }
-    .anu::before {
-      content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.2);
-    transform: skewX(-30deg);
-    transition: all 0.4s;
-    }
-  .anu:hover::before {
-    left: 100%;
-    transition: all 0.4s;
-  }
-    .switch-link {
-      margin-top: 15px;
-      color: #5c5c9a;
-      cursor: pointer;
-      font-size: 14px;
-    }
-  </style>
+  <title>Hann Universe</title>
 </head>
 <body>
+   <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
 
-  <!-- Form Register -->
-  <div class="container" id="registerForm" style="display: none;">
-    <h2>Register</h2>
-    <input type="text" id="registerUsername" placeholder="Username" required>
-    <input type="text" id="registerEmail" placeholder="Email" required>
-    <input type="password" id="registerPassword" placeholder="Password" required>
-    <input type="submit" value="Register" onclick="register()">
-    <p id="registerMessage"></p>
-    <p class="switch-link" onclick="toggleForms()">
-      Sudah punya akun? Login di sini
-    </p>
-    <a href="/profile">profile</a>
+body {
+  background: linear-gradient(135deg, #2d2d2d, #4a4a4a);
+  color: #fff;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+}
+
+.container {
+  width: 80%;
+  max-width: 1200px;
+  background-color: #1c1c1c;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.header {
+  margin-bottom: 50px;
+  position: relative;
+}
+
+.profile-picture img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 5px solid #f1c40f;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+.profile-picture img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 30px rgba(241, 196, 15, 0.7);
+}
+
+h1 {
+  font-size: 48px;
+  font-weight: 600;
+  color: #f1c40f;
+  margin-top: 20px;
+}
+
+.job-title {
+  font-size: 22px;
+  font-weight: 500;
+  color: #ecf0f1;
+}
+
+section {
+  margin-bottom: 40px;
+}
+
+section h2 {
+  font-size: 30px;
+  font-weight: 600;
+  color: #f1c40f;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+section p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #ecf0f1;
+}
+
+.skills-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.skill-item {
+  background-color: #34495e;
+  padding: 15px 25px;
+  border-radius: 30px;
+  font-size: 18px;
+  color: #ecf0f1;
+  font-weight: 500;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.skill-item:hover {
+  background-color: #f1c40f;
+  color: #2d2d2d;
+  transform: translateY(-5px);
+}
+
+.contact p {
+  font-size: 18px;
+  color: #ecf0f1;
+  margin: 5px 0;
+}
+
+/* Hover effects */
+h1, .job-title, .skills-list .skill-item {
+  transition: transform 0.3s ease-in-out;
+}
+
+h1:hover, .job-title:hover, .skills-list .skill-item:hover {
+  transform: translateY(-5px);
+}
+
+/* Media Query for Smaller Screens */
+@media (max-width: 768px) {
+  .container {
+    width: 90%;
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 36px;
+  }
+
+  .job-title {
+    font-size: 18px;
+  }
+
+  section h2 {
+    font-size: 26px;
+  }
+
+  .skill-item {
+    font-size: 16px;
+    padding: 12px 20px;
+  }
+}
+   </style>
+  <div class="container">
+    <header>
+      <div class="profile-picture">
+        <img src="https://files.catbox.moe/kdfdpu.jpg" alt="Profile Picture">
+      </div>
+      <h1>Hann Universe</h1>
+      <p class="job-title">Bot WhatsApp</p>
+    </header>
+    
+    <section class="about">
+      <h2>Tentang diriku</h2>
+      <p>halo, perkenalkan namaku hann umur aku 14 aku memiliki tim yaitu universe. aku suka desain grafis yang bagus dan aku memiliki kemampuan koding seadanya seperti nodejs dan javascript. aku gak terlalu jago jadi maapp yaa</p>
+    </section>
+    
+    <section class="skills">
+      <h2>Skills</h2>
+      <ul>
+        <li>JavaScript</li>
+        <li>Node.js</li>
+        </ul>
+    </section>
+    
+    <section class="contact">
+      <h2>Contact</h2>
+      <p>Email: hanzzrillnopekpek@gmail.com</p>
+      <p>Phone: +62 838-2419-6477</p>
+      <p>Location: Kecamatan Padalarang, Bandung Barat</p>
+    </section>
   </div>
-
-  <!-- Form Login -->
-  <div class="container" id="loginForm">
-    <h2>Login</h2>
-    <input type="text" id="loginEmail" placeholder="Email" required>
-    <input type="password" id="loginPassword" placeholder="Password" required>
-    <input class="anu" type="submit" value="Login" onclick="login()">
-    <p id="loginMessage"></p>
-    <p class="switch-link" onclick="toggleForms()">
-      Belum punya akun? Daftar di sini
-    </p>
-    <a href="/profile">profile</a>
-  </div>
-
-  <script>
-
-    function toggleForms() {
-      const registerForm = document.getElementById('registerForm');
-      const loginForm = document.getElementById('loginForm');
-      if (registerForm.style.display === "none") {
-        registerForm.style.display = "block";
-        loginForm.style.display = "none";
-      } else {
-        registerForm.style.display = "none";
-        loginForm.style.display = "block";
-      }
-    }
-
-    function register() {
-      const username = document.getElementById('registerUsername').value;
-      const email = document.getElementById('registerEmail').value;
-      const password = document.getElementById('registerPassword').value;
-
-      fetch('/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          username, email, password
-        })
-      })
-      .then(response => response.json())
-      .then(data => {
-        document.getElementById('registerMessage').textContent = data.message;
-        if (data.success) {
-          document.getElementById('registerForm').style.display = 'none';
-          document.getElementById('loginForm').style.display = 'block';
-        }
-      });
-    }
-
-    function login() {
-      const email = document.getElementById('loginEmail').value;
-      const password = document.getElementById('loginPassword').value;
-
-      fetch('/login',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            email, password
-          })
-        })
-      .then(response => response.json())
-      .then(data => {
-        document.getElementById('loginMessage').textContent = data.message;
-        if (data.success) {
-          alert("Login sukses!");
-        }
-      });
-    }
-  </script>
-
 </body>
 </html>
