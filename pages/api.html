@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hann APIs Documentation</title>
+</head>
+<body>
+   <style>
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #0D1117;
+    color: #C9D1D9;
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #161B22;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Header */
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    color: #58A6FF;
+}
+
+.header p {
+    font-size: 1rem;
+    color: #8B949E;
+    margin: 10px 0;
+}
+
+/* API Section */
+.api-section h2 {
+    font-size: 1.8rem;
+    color: #58A6FF;
+    margin-bottom: 15px;
+}
+
+.api-endpoint {
+    background-color: #21262D;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 5px solid #58A6FF;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.endpoint-details {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.method {
+    display: inline-block;
+    min-width: 60px;
+    text-align: center;
+    padding: 5px;
+    font-weight: bold;
+    border-radius: 3px;
+}
+
+.method.get {
+    background-color: #238636;
+    color: #ffffff;
+}
+
+.endpoint {
+    margin-left: 10px;
+    font-size: 1rem;
+    color: #C9D1D9;
+}
+
+.description {
+    margin: 10px 0;
+    font-size: 0.9rem;
+    color: #8B949E;
+}
+
+/* Try It Out Form */
+.try-it-out {
+    margin-top: 10px;
+}
+
+.try-it-out label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #C9D1D9;
+}
+
+.try-it-out input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #0D1117;
+    border: 1px solid #58A6FF;
+    border-radius: 5px;
+    color: #C9D1D9;
+}
+
+.try-it-out input:focus {
+    outline: none;
+    border-color: #238636;
+}
+
+.try-btn {
+    padding: 10px 20px;
+    background-color: #58A6FF;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.try-btn:hover {
+    background-color: #238636;
+}
+
+/* Responses */
+.responses h3 {
+    font-size: 1.5rem;
+    color: #58A6FF;
+    margin-bottom: 10px;
+}
+
+.response {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #21262D;
+    border-radius: 5px;
+}
+
+.response p {
+    margin-bottom: 5px;
+}
+
+.media-type {
+    font-size: 0.9rem;
+    color: #8B949E;
+}
+
+code {
+    display: block;
+    background-color: #0D1117;
+    padding: 10px;
+    border-radius: 5px;
+    color: #C9D1D9;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #161B22;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: #8B949E;
+}
+
+.footer .author {
+    color: #58A6FF;
+}
+
+.footer .heart {
+    color: #FF6F61;
+}
+   </style>
+    <div class="container">
+        <header class="header">
+            <h1>Hann-API's</h1>
+            <p>Hann Universe provides endpoints for accessing anime-related data and AI functionalities.</p>
+        </header>
+
+        <section class="api-section">
+            <h2>Sosial Media Dowmloader</h2>
+            <div class="api-endpoint">
+                <div class="endpoint-details">
+                    <span class="method get">GET</span>
+                    <span class="endpoint">/api/ttdl/</span>
+                </div>
+                <p class="description">Tiktok dowmloader with link</p>
+                <form class="try-it-out">
+                    <label for="limk">Link <span class="required">*</span></label>
+                    <input type="text" id="link" name="/api/ttdl" placeholder="Enter Tiktok link" required>
+                    <button type="submit" class="try-btn">Try It Out</button>
+                </form>
+            </div>
+        </section>
+        
+
+        <section class="responses">
+            <h3>Responses</h3>
+            <div class="response">
+                <p><strong>200:</strong> Success</p>
+                <div class="response-details">
+                    <span class="media-type">Media type: application/json</span>
+                    <code>"string"</code>
+                </div>
+            </div>
+            <div class="response">
+                <p><strong>400:</strong> Parameter format not found</p>
+                <div class="response-details">
+                    <span class="media-type">Media type: application/json</span>
+                    <code>"string"</code>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>©2024 — Hann Apis <span class="author">hann</span></p>
+            <p>Home Page Created <span class="heart">❤</span> by <span class="author">Hann</span></p>
+        </footer>
+    </div>
+</body>
+</html>
