@@ -1,183 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hann Universe</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hann Universe</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        header {
+            text-align: center;
+            padding: 20px;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #d17e4d;
+        }
+        nav {
+            text-align: center;
+            margin-top: 10px;
+        }
+        nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .profile-picture {
+            text-align: center;
+        }
+        .profile-picture img {
+            width: 150px;
+            height: auto;
+            border-radius: 50%;
+            border: 2px solid #ccc;
+        }
+        .bio {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-   <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
-}
-
-body {
-  background: linear-gradient(135deg, #2d2d2d, #4a4a4a);
-  color: #fff;
-  font-size: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  padding: 20px;
-}
-
-.container {
-  width: 80%;
-  max-width: 1200px;
-  background-color: #1c1c1c;
-  padding: 40px;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  text-align: center;
-}
-
-.header {
-  margin-bottom: 50px;
-  position: relative;
-}
-
-.profile-picture img {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  border: 5px solid #f1c40f;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease-in-out;
-}
-
-.profile-picture img:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 30px rgba(241, 196, 15, 0.7);
-}
-
-h1 {
-  font-size: 48px;
-  font-weight: 600;
-  color: #f1c40f;
-  margin-top: 20px;
-}
-
-.job-title {
-  font-size: 22px;
-  font-weight: 500;
-  color: #ecf0f1;
-}
-
-section {
-  margin-bottom: 40px;
-}
-
-section h2 {
-  font-size: 30px;
-  font-weight: 600;
-  color: #f1c40f;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
-
-section p {
-  font-size: 18px;
-  line-height: 1.6;
-  color: #ecf0f1;
-}
-
-.skills-list {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 15px;
-}
-
-.skill-item {
-  background-color: #34495e;
-  padding: 15px 25px;
-  border-radius: 30px;
-  font-size: 18px;
-  color: #ecf0f1;
-  font-weight: 500;
-  transition: transform 0.3s ease, background-color 0.3s ease;
-  cursor: pointer;
-}
-
-.skill-item:hover {
-  background-color: #f1c40f;
-  color: #2d2d2d;
-  transform: translateY(-5px);
-}
-
-.contact p {
-  font-size: 18px;
-  color: #ecf0f1;
-  margin: 5px 0;
-}
-
-/* Hover effects */
-h1, .job-title, .skills-list .skill-item {
-  transition: transform 0.3s ease-in-out;
-}
-
-h1:hover, .job-title:hover, .skills-list .skill-item:hover {
-  transform: translateY(-5px);
-}
-
-/* Media Query for Smaller Screens */
-@media (max-width: 768px) {
-  .container {
-    width: 90%;
-    padding: 20px;
-  }
-
-  h1 {
-    font-size: 36px;
-  }
-
-  .job-title {
-    font-size: 18px;
-  }
-
-  section h2 {
-    font-size: 26px;
-  }
-
-  .skill-item {
-    font-size: 16px;
-    padding: 12px 20px;
-  }
-}
-   </style>
-  <div class="container">
     <header>
-      <div class="profile-picture">
-        <img src="https://files.catbox.moe/kdfdpu.jpg" alt="Profile Picture">
-      </div>
-      <h1>Hann Universe</h1>
-      <p class="job-title">Bot WhatsApp</p>
+        <h1>Hann Universe</h1>
     </header>
-    
-    <section class="about">
-      <h2>Tentang diriku</h2>
-      <p>halo, perkenalkan namaku hann umur aku 14 aku memiliki tim yaitu universe. aku suka desain grafis yang bagus dan aku memiliki kemampuan koding seadanya seperti nodejs dan javascript. aku gak terlalu jago jadi maapp yaa</p>
-    </section>
-    
-    <section class="skills">
-      <h2>Skills</h2>
-      <ul>
-        <li>JavaScript</li>
-        <li>Node.js</li>
-        </ul>
-    </section>
-    
-    <section class="contact">
-      <h2>Contact</h2>
-      <p>Email: hanzzrillnopekpek@gmail.com</p>
-      <p>Phone: +62 838-2419-6477</p>
-      <p>Location: Kecamatan Padalarang, Bandung Barat</p>
-    </section>
-  </div>
+    <div class="container">
+        <div class="profile-picture">
+            <img src="https://files.catbox.moe/kdfdpu.jpg" alt="Profile Picture">
+        </div>
+        <div class="bio">
+            <p>
+                nama ku Hann, saya sebagai Editor pemula, Programmer pemula butuh peningkatan lagi yang lebih tinggi. buat hari ini dam seterusnya saya akan terus berkembang ke masa yang baru
+            </p>
+            <p>
+                umur ku 14, hobi ku biasa Ngedit. butuh nilai baru ke tahun baru dan baru lagi seterusnya butu berkembang yang Baik dan Bijak. terima kasih yang sudah membacanya
+            </p>
+        </div>
+    </div>
 </body>
 </html>
