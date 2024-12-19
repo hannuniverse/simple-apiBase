@@ -46,16 +46,8 @@ app.get("/api", limit, (req, res) => {
 
 /* = ENDPOINT FITURE = */
 
-app.get("/api/blekbok", limit, async (req, res) => {
-    require("../pages/fitures/blackbox.js")(req, res)
-})
-
-app.get("/api/tiktokDL", limit, async (req, res) => {
+app.get("/api/ttdl", limit, async (req, res) => {
     require("../pages/fitures/tiktok.js")(req, res)
-})
-
-app.get("/api/instagramDL", limit, async (req, res) => {
-    require("../pages/fitures/instagram.js")(req, res)
 })
 
 app.use((req, res, next) => {
