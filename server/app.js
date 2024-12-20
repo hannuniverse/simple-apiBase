@@ -40,6 +40,11 @@ app.get("/profile", limit, (req, res) => {
     res.sendFile(path.join(__dirname, "../pages/prof.html"))
 })
 
+app.get("/privacy-policy", limit, (req, res) => {
+    res.sendFile(path.join(__dirname, "../pages/privacy-policy.html"))
+})
+
+  
 app.get("/api", limit, (req, res) => {
     res.sendFile(path.join(__dirname, "../pages/api.html"))
 })
