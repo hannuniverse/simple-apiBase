@@ -3,235 +3,316 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hann APIs Documentation</title>
+    <title>Hann Apis Documentation</title>
 </head>
 <body>
    <style>
-/* Global Styles */
-* {
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1c1c3c, #4a5cd8);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 100vh;
+    overflow: hidden; /* Prevent scroll during loading */
 }
 
-body {
-    background-color: #0D1117;
-    color: #C9D1D9;
-    line-height: 1.6;
-    font-size: 16px;
+.main-title {
+    text-align: center;
+    margin-top: 30px;
+    height: 60px;
+}
+
+#typing-text {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #f8e71c;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
 }
 
 .container {
+    text-align: center;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
     width: 90%;
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #161B22;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    backdrop-filter: blur(10px);
 }
 
-/* Header */
-.header {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.header h1 {
-    font-size: 2.5rem;
-    color: #58A6FF;
-}
-
-.header p {
-    font-size: 1rem;
-    color: #8B949E;
-    margin: 10px 0;
-}
-
-/* API Section */
-.api-section h2 {
-    font-size: 1.8rem;
-    color: #58A6FF;
-    margin-bottom: 15px;
-}
-
-.api-endpoint {
-    background-color: #21262D;
-    padding: 20px;
-    border-radius: 8px;
+.container h2 {
+    font-size: 2rem;
     margin-bottom: 20px;
-    border-left: 5px solid #58A6FF;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    color: #f8e71c;
 }
 
-.endpoint-details {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
+.feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-.method {
+.feature-list li {
+    margin: 15px 0;
+}
+
+.feature-button {
+    text-decoration: none;
+    font-size: 1.2rem;
+    color: #f8e71c;
+    padding: 15px 20px;
+    border: 2px solid #f8e71c;
+    border-radius: 30px;
     display: inline-block;
-    min-width: 60px;
-    text-align: center;
-    padding: 5px;
-    font-weight: bold;
-    border-radius: 3px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
-.method.get {
-    background-color: #238636;
-    color: #ffffff;
+.feature-button:hover {
+    background-color: #f8e71c;
+    color: #1c1c3c;
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(248, 231, 28, 0.5);
 }
 
-.endpoint {
-    margin-left: 10px;
-    font-size: 1rem;
-    color: #C9D1D9;
+.feature-button:active {
+    transform: scale(0.9);
+    box-shadow: 0 4px 10px rgba(248, 231, 28, 0.3);
+    background-color: #d4c108;
 }
 
-.description {
-    margin: 10px 0;
-    font-size: 0.9rem;
-    color: #8B949E;
-}
-
-/* Try It Out Form */
-.try-it-out {
-    margin-top: 10px;
-}
-
-.try-it-out label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #C9D1D9;
-}
-
-.try-it-out input {
+/* Popup Styles */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: #0D1117;
-    border: 1px solid #58A6FF;
-    border-radius: 5px;
-    color: #C9D1D9;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-.try-it-out input:focus {
-    outline: none;
-    border-color: #238636;
+.popup-content {
+    background: #fff;
+    color: #1c1c3c;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transform: scale(0.8);
+    transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-.try-btn {
+.popup-content p {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.popup-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.popup-btn {
     padding: 10px 20px;
-    background-color: #58A6FF;
-    color: #ffffff;
+    font-size: 1rem;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.try-btn:hover {
-    background-color: #238636;
+.popup-btn.yes {
+    background-color: #4caf50;
+    color: #fff;
 }
 
-/* Responses */
-.responses h3 {
-    font-size: 1.5rem;
-    color: #58A6FF;
-    margin-bottom: 10px;
+.popup-btn.yes:hover {
+    background-color: #45a049;
 }
 
-.response {
-    margin-bottom: 10px;
-    padding: 10px;
-    background-color: #21262D;
-    border-radius: 5px;
+.popup-btn.no {
+    background-color: #f44336;
+    color: #fff;
 }
 
-.response p {
-    margin-bottom: 5px;
+.popup-btn.no:hover {
+    background-color: #e53935;
 }
 
-.media-type {
-    font-size: 0.9rem;
-    color: #8B949E;
+.popup.show {
+    opacity: 1;
+    visibility: visible;
 }
 
-code {
-    display: block;
-    background-color: #0D1117;
-    padding: 10px;
-    border-radius: 5px;
-    color: #C9D1D9;
+.popup.show .popup-content {
+    transform: scale(1);
+    opacity: 1;
 }
 
-/* Footer */
-.footer {
-    text-align: center;
-    margin-top: 30px;
-    padding: 20px;
-    background-color: #161B22;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    color: #8B949E;
+/* Loading Screen */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #1c1c3c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 1.5s ease, visibility 1.5s ease;
 }
 
-.footer .author {
-    color: #58A6FF;
+.loading-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
 }
 
-.footer .heart {
-    color: #FF6F61;
+/* Loading Text with Dots Animation */
+.loading-text {
+    font-size: 2rem;
+    color: #f8e71c;
+    letter-spacing: 2px;
+    animation: fadeInOut 2s infinite;
+}
+
+.dots::after {
+    content: "";
+    display: inline-block;
+    animation: dots 1.5s steps(3, end) infinite;
+}
+
+@keyframes dots {
+    0% {
+        content: "";
+    }
+    33% {
+        content: ".";
+    }
+    66% {
+        content: "..";
+    }
+    100% {
+        content: "...";
+    }
+}
+
+/* Fade-in and Fade-out Animation */
+@keyframes fadeInOut {
+    0%, 100% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
 }
    </style>
-    <div class="container">
-        <header class="header">
-            <h1>Hann-API's</h1>
-            <p>Hann Universe provides endpoints for accessing anime-related data and AI functionalities.</p>
-        </header>
-
-        <section class="api-section">
-            <h2>Sosial Media Dowmloader</h2>
-            <div class="api-endpoint">
-                <div class="endpoint-details">
-                    <span class="method get">GET</span>
-                    <span class="endpoint">/api/ttdl/</span>
-                </div>
-                <p class="description">Tiktok dowmloader with link</p>
-                <form class="try-it-out">
-                    <label for="link">Link <span class="required">*</span></label>
-                    <input type="text" id="link" name="/ttdl?urls=" placeholder="Enter Tiktok link" required>
-                    <button type="submit" class="try-btn">Try It Out</button>
-                </form>
-            </div>
-        </section>
-        
-
-        <section class="responses">
-            <h3>Responses</h3>
-            <div class="response">
-                <p><strong>200:</strong> Success</p>
-                <div class="response-details">
-                    <span class="media-type">Media type: application/json</span>
-                    <code>"string"</code>
-                </div>
-            </div>
-            <div class="response">
-                <p><strong>400:</strong> Parameter format not found</p>
-                <div class="response-details">
-                    <span class="media-type">Media type: application/json</span>
-                    <code>"string"</code>
-                </div>
-            </div>
-        </section>
-
-        <footer class="footer">
-            <p>©2024 — Hann Apis <span class="author">hann</span></p>
-            <p>Home Page Created <span class="heart">❤</span> by <span class="author">Hann</span></p>
-        </footer>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <p class="loading-text">
+            Loading<span class="dots"></span>
+        </p>
     </div>
+
+    <!-- Main Content -->
+    <header class="main-title">
+        <h1 id="typing-text"></h1>
+    </header>
+    <div class="container">
+        <h2>Fitur Rest Apis</h2>
+        <ul class="feature-list">
+            <li><a href="#" class="feature-button" onclick="showPopup('Tiktok Downloader', 'https://hannuniverse.vercel.app/api/ttdl?urls=')">Tiktok Downloader</a></li>
+        </ul>
+    </div>
+    <footer class="footer">
+        <p>&copy; 2024 Hann Universe. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Popup -->
+    <div id="popup" class="popup hidden">
+        <div class="popup-content">
+            <p id="popup-message"></p>
+            <div class="popup-buttons">
+                <button class="popup-btn yes" id="popup-yes">Yes</button>
+                <button class="popup-btn no" onclick="closePopup()">No</button>
+            </div>
+        </div>
+    </div>
+    <script>
+       // Loading screen logic
+document.addEventListener("DOMContentLoaded", () => {
+    const loadingScreen = document.getElementById("loading-screen");
+
+    // Simulate loading for 3 seconds
+    setTimeout(() => {
+        loadingScreen.classList.add("hidden");
+        document.body.style.overflow = "auto"; // Enable scroll after loading
+    }, 3000);
+});
+
+// Typing animation for header
+const texts = [
+    "Selamat Datang di Hann Apis",
+    "Nikmati Fitur Hann yang Bagus",
+    "Disini Gak Pake Apikey Rek"
+];
+
+let textIndex = 0;
+const typingTextElement = document.getElementById("typing-text");
+
+function showNextText() {
+    typingTextElement.textContent = texts[textIndex];
+    typingTextElement.style.opacity = 1;
+
+    setTimeout(() => {
+        typingTextElement.style.opacity = 0;
+    }, 3000);
+
+    textIndex = (textIndex + 1) % texts.length;
+
+    setTimeout(showNextText, 4000);
+}
+
+showNextText();
+
+// Popup logic
+const popup = document.getElementById("popup");
+const popupMessage = document.getElementById("popup-message");
+const popupYesButton = document.getElementById("popup-yes");
+
+function showPopup(message, link) {
+    popupMessage.textContent = `Apakah kamu ingin menggunakan fitur ini?\n(${message})`;
+    popup.classList.add("show");
+
+    // Set up the Yes button to navigate to the link
+    popupYesButton.onclick = function () {
+        window.location.href = link;
+    };
+}
+
+function closePopup() {
+    popup.classList.remove("show");
+}
+</script>
 </body>
 </html>
