@@ -41,7 +41,7 @@ app.get("/profile", limit, (req, res) => {
 })
 
 app.get("/privacy-policy", limit, (req, res) => {
-    res.sendFile(path.join(__dirname, "../pages/privacy-policy.html"))
+    res.sendFile(path.join(__dirname, "../pages/privacypolicy.html"))
 })
 
   
